@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "903567194568",
+    "project_id": "trackpay-7524a",
+    "storage_bucket": "trackpay-7524a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903567194568:android:f3df5d68e4d00c5259e8fd",
+        "android_client_info": {
+          "package_name": "uk.ac.tees.mad.w9611189"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl-NZPe2gHmGq-yhu6TGC2LnCBDWP4HRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
