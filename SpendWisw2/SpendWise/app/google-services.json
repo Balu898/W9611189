@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "84700629151",
+    "project_id": "spendwise-5f253",
+    "storage_bucket": "spendwise-5f253.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84700629151:android:c74ea017c5c2482dc6faaa",
+        "android_client_info": {
+          "package_name": "uk.ac.tees.mad.w9611189"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4U4T9tWloQdDq9LiHC4VilX2zI_0a-2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
