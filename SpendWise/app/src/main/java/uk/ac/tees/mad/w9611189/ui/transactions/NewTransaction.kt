@@ -162,9 +162,9 @@ fun NewTransaction(navController: NavController) {
         ActivityResultContracts.RequestPermission()
     ) {
         if (it) {
-            Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
+            Helper.showToast(context, "Permission Granted")
         } else {
-            Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
+            Helper.showToast(context, "Permission Denied")
         }
     }
 
@@ -173,9 +173,9 @@ fun NewTransaction(navController: NavController) {
     ) {
         if (it) {
             showMap = true
-            Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
+            Helper.showToast(context, "Permission Granted")
         } else {
-            Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
+            Helper.showToast(context, "Permission Denied")
         }
     }
 

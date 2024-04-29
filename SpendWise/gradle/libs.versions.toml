@@ -3,6 +3,7 @@ activityKtx = "1.8.2"
 agp = "8.5.0-alpha04"
 charts = "0.2.4-alpha"
 coilCompose = "2.6.0"
+converterGson = "2.9.0"
 firebaseBomVersion = "32.8.1"
 material = "1.6.5"
 navigation = "2.7.7"
@@ -19,6 +20,7 @@ googleGmsGoogleServices = "4.4.1"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
 composeBom = "2024.04.00"
+retrofit = "2.9.0"
 
 
 [libraries]
@@ -28,6 +30,7 @@ androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
 charts = { module = "com.github.tehras:charts", version.ref = "charts" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 firebase-storage = {module = "com.google.firebase:firebase-storage"}
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBomVersion" }
@@ -53,6 +56,7 @@ maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = 
 maps-ktx = { module = "com.google.maps.android:maps-ktx", version.ref = "mapsKtx" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

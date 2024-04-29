@@ -1,5 +1,6 @@
 package uk.ac.tees.mad.w9611189.ui.transactions
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,16 +27,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import uk.ac.tees.mad.w9611189.R
 import uk.ac.tees.mad.w9611189.ui.profile.User
 import uk.ac.tees.mad.w9611189.ui.util.Helper
+import uk.ac.tees.mad.w9611189.ui.util.Routes
 
 @Composable
-@Preview
-fun AllTransactions() {
+fun AllTransactions(navController: NavController) {
 
 
     val firebaseAuth by remember {
@@ -66,10 +68,10 @@ fun AllTransactions() {
                 if (task.isSuccessful && task.result.exists()) {
                     user = task.result.toObject(User::class.java)
                     firebaseFireStore.collection("transaction").document(currentUser!!.uid)
-                        .collection("trans").get().addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
+                        .collection("trans").get().addOnCompleteListener { task1 ->
+                            if (task1.isSuccessful) {
 
-                                for (document in task.result.documents) {
+                                for (document in task1.result.documents) {
                                     if (document.exists()) {
                                         val trans = document.toObject(Transaction::class.java)
                                         if (trans != null) {
@@ -90,7 +92,9 @@ fun AllTransactions() {
     Column {
         LazyColumn {
             items(allTrans.size) { index ->
-                Item(allTrans[index],user!!.currency!!)
+                Item(allTrans[index],user!!.currency!!,onClick = { id ->
+                    navController.navigate("${Routes.ViewTransactionScreen.route}?transactionId=${id}&userId=${currentUser?.uid!!}&currency=${user?.currency!!}")
+                })
             }
 
         }
@@ -98,9 +102,12 @@ fun AllTransactions() {
 }
 
 @Composable
-fun Item(transaction: Transaction, currency: String) {
+fun Item(transaction: Transaction, currency: String, onClick: (id:String) -> Unit) {
     Card(
         modifier = Modifier
+            .clickable {
+                onClick.invoke(transaction.id!!)
+            }
             .fillMaxSize()
             .padding(8.dp)
     ) {

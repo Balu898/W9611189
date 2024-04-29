@@ -11,4 +11,6 @@ sealed class Routes(val route:String) {
     data object AllTransactionScreen : Routes("All Transaction")
     data object NewTransactionScreen : Routes("New Transaction")
     data object NewCategoryScreen : Routes("Add Category")
+    data object ViewTransactionScreen : Routes("View Transaction")
+    data object CurrencyConversionScreen : Routes("Currency Conversion")
 }

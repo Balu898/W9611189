@@ -25,11 +25,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import uk.ac.tees.mad.w9611189.ui.currencyconversion.CurrencyConversion
 import uk.ac.tees.mad.w9611189.ui.home.HomeScreen
 import uk.ac.tees.mad.w9611189.ui.login.LoginScreen
 import uk.ac.tees.mad.w9611189.ui.login.RegisterScreen
@@ -39,6 +43,7 @@ import uk.ac.tees.mad.w9611189.ui.splash.SplashScreen
 import uk.ac.tees.mad.w9611189.ui.theme.SpendWiseTheme
 import uk.ac.tees.mad.w9611189.ui.transactions.AllTransactions
 import uk.ac.tees.mad.w9611189.ui.transactions.NewTransaction
+import uk.ac.tees.mad.w9611189.ui.transactions.ViewTransaction
 import uk.ac.tees.mad.w9611189.ui.util.Routes
 
 
@@ -59,8 +64,8 @@ class MainActivity : ComponentActivity() {
 
                     topBar = {
                         when (currentRoute) {
-                            Routes.HomeScreen.route, Routes.AllTransactionScreen.route,Routes.NewTransactionScreen.route, Routes.ProfileScreen.route,
-                            Routes.NewCategoryScreen.route -> {
+                            Routes.HomeScreen.route, Routes.AllTransactionScreen.route, Routes.NewTransactionScreen.route, Routes.ProfileScreen.route,
+                            Routes.NewCategoryScreen.route,Routes.CurrencyConversionScreen.route -> {
 
                                 TopAppBar(
                                     colors = TopAppBarDefaults.topAppBarColors(
@@ -72,7 +77,8 @@ class MainActivity : ComponentActivity() {
                                     navigationIcon = {
 
                                         if (currentRoute == Routes.NewTransactionScreen.route ||
-                                            currentRoute == Routes.NewCategoryScreen.route) {
+                                            currentRoute == Routes.NewCategoryScreen.route
+                                        ) {
                                             Icon(
                                                 Icons.AutoMirrored.Filled.ArrowBack,
                                                 modifier = Modifier
@@ -100,7 +106,7 @@ class MainActivity : ComponentActivity() {
                     bottomBar = {
 
                         when (currentRoute) {
-                            Routes.HomeScreen.route, Routes.AllTransactionScreen.route, Routes.ProfileScreen.route -> {
+                            Routes.HomeScreen.route,Routes.CurrencyConversionScreen.route, Routes.AllTransactionScreen.route, Routes.ProfileScreen.route -> {
                                 BottomNavigation(
                                     backgroundColor = colorResource(id = R.color.purple_200),
                                 ) {
@@ -111,7 +117,7 @@ class MainActivity : ComponentActivity() {
                                         selected = currentRoute == Routes.AllTransactionScreen.route,
                                         onClick = {
                                             if (currentRoute != Routes.AllTransactionScreen.route) {
-                                                navController.navigate(Routes.AllTransactionScreen.route){
+                                                navController.navigate(Routes.AllTransactionScreen.route) {
                                                     popUpTo(Routes.HomeScreen.route)
                                                 }
                                             }
@@ -125,7 +131,7 @@ class MainActivity : ComponentActivity() {
                                         },
                                         label = {
                                             Text(
-                                                "Transactions", color = Color.White,
+                                                "History", color = Color.White,
                                                 modifier = Modifier.padding(vertical = 16.dp)
                                             )
                                         }
@@ -158,7 +164,7 @@ class MainActivity : ComponentActivity() {
                                         selected = currentRoute == Routes.ProfileScreen.route,
                                         onClick = {
                                             if (currentRoute != Routes.ProfileScreen.route) {
-                                                navController.navigate(Routes.ProfileScreen.route){
+                                                navController.navigate(Routes.ProfileScreen.route) {
                                                     popUpTo(Routes.HomeScreen.route)
                                                 }
                                             }
@@ -173,6 +179,31 @@ class MainActivity : ComponentActivity() {
                                         label = {
                                             Text(
                                                 "Profile", color = Color.White,
+                                                modifier = Modifier.padding(vertical = 16.dp)
+                                            )
+                                        }
+                                    )
+
+                                    BottomNavigationItem(
+                                        modifier = Modifier.padding(top = 8.dp),
+                                        selected = currentRoute == Routes.CurrencyConversionScreen.route,
+                                        onClick = {
+                                            if (currentRoute != Routes.CurrencyConversionScreen.route) {
+                                                navController.navigate(Routes.CurrencyConversionScreen.route) {
+                                                    popUpTo(Routes.HomeScreen.route)
+                                                }
+                                            }
+                                        },
+                                        icon = {
+                                            Icon(
+                                                painter = painterResource(id = R.drawable.baseline_currency_exchange_24),
+                                                tint = Color.White,
+                                                contentDescription = "Exchange"
+                                            )
+                                        },
+                                        label = {
+                                            Text(
+                                                "Exchange", color = Color.White,
                                                 modifier = Modifier.padding(vertical = 16.dp)
                                             )
                                         }
@@ -208,7 +239,7 @@ class MainActivity : ComponentActivity() {
                                 HomeScreen(navController)
                             }
                             composable(route = Routes.AllTransactionScreen.route) {
-                                AllTransactions()
+                                AllTransactions(navController)
                             }
                             composable(route = Routes.ProfileScreen.route) {
                                 ProfileScreen(navController)
@@ -226,6 +257,36 @@ class MainActivity : ComponentActivity() {
                                 RegisterScreen(navController)
                             }
 
+                            composable(route = Routes.CurrencyConversionScreen.route) {
+                                CurrencyConversion()
+                            }
+
+
+
+                            composable(
+                                route = "${Routes.ViewTransactionScreen.route}?transactionId={transactionId}&userId={userId}",
+                                arguments = listOf(
+                                    navArgument("transactionId") {
+                                        type = NavType.StringType
+                                        defaultValue = ""
+                                    },
+                                    navArgument("userId") {
+                                        type = NavType.StringType
+                                        defaultValue = ""
+                                    },
+                                    navArgument("currency") {
+                                        type = NavType.StringType
+                                        defaultValue = ""
+                                    },
+
+                                    )
+                            ) { backStackEntry ->
+                                val transId =
+                                    backStackEntry.arguments?.getString("transactionId") ?: ""
+                                val userId = backStackEntry.arguments?.getString("userId") ?: ""
+                                val currency = backStackEntry.arguments?.getString("currency") ?: ""
+                                ViewTransaction(navController, transId, userId, currency)
+                            }
                         }
                     }
                 }
