@@ -54,6 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.text.isDigitsOnly
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -78,9 +79,8 @@ import java.util.Objects
 import java.util.UUID
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
 @Composable
-fun NewTransaction() {
+fun NewTransaction(navController: NavController) {
 
     val context = LocalContext.current
 
@@ -452,8 +452,9 @@ fun NewTransaction() {
                                 Helper.showToast(context, "Enter Valid Amount")
                             } else if (selectedCategory.isEmpty() || selectedCategory.isBlank()) {
                                 Helper.showToast(context, "Select Category")
-                            } else {
-
+                            } else if(receiptImageUri == null) {
+                                Helper.showToast(context, "Upload Image")
+                            }else {
                                 showLoader = true
 
 
@@ -489,6 +490,8 @@ fun NewTransaction() {
                                                                     context,
                                                                     "Transaction added successfully"
                                                                 )
+                                                                navController.popBackStack()
+
                                                             } else {
                                                                 firebaseStorage.reference.child(uuid)
                                                                     .delete()

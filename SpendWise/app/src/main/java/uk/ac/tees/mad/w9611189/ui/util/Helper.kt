@@ -6,6 +6,8 @@ import android.location.Geocoder
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.widget.Toast
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -34,6 +36,17 @@ object Helper {
         val sdf = SimpleDateFormat("dd/MM/yy")
         val netDate = Date(timeStamp)
         return sdf.format(netDate)
+    }
+
+    fun getRandomColor(i:Int): Color {
+       return when(i) {
+            0 -> Color.Red
+            1 -> Color.Blue
+            2 -> Color.Cyan
+            3 -> Color.Magenta
+            4 -> Color.Yellow
+           else -> Color.Red
+        }
     }
 
 

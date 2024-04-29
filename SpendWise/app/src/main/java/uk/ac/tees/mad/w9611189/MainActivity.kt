@@ -214,7 +214,7 @@ class MainActivity : ComponentActivity() {
                                 ProfileScreen(navController)
                             }
                             composable(route = Routes.NewTransactionScreen.route) {
-                                NewTransaction()
+                                NewTransaction(navController)
                             }
                             composable(route = Routes.NewCategoryScreen.route) {
                                 AddNewCategory()

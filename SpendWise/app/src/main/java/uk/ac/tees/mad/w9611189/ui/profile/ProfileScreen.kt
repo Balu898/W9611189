@@ -198,24 +198,24 @@ fun ProfileScreen(navController: NavHostController? = null) {
                                     "Education",
                                     "Debt Payments",
                                     "Home Maintenance",
-                                    "Gifts/Donations",
+                                    "Gifts",
                                     "Travel",
-                                    "Subscriptions/Memberships"
+                                    "Subscriptions"
                                 ),
                                 incomeCategories = listOf(
-                                    "Salary/Wages",
-                                    "Freelance/Contract Work",
+                                    "Salary",
+                                    "Freelance",
                                     "Investment Income",
                                     "Rental Income",
                                     "Business Income",
-                                    "Bonuses/Commissions",
-                                    "Grants/Scholarships",
-                                    "Alimony/Child Support",
+                                    "Bonuses",
+                                    "Grants",
+                                    "Alimony",
                                     "Social Security Benefits",
-                                    "Pension/Retirement Income",
+                                    "Pension",
                                     "Reimbursements",
                                     "Royalties",
-                                    "Tips/Gratuities",
+                                    "Tips",
                                     "Gambling Winnings",
                                     "Sales of Assets"
                                 )
